@@ -1,0 +1,28 @@
+{
+    "dht": {
+        "k": 20,
+        "alpha": 3,
+        "idLength": 160,
+        "bucketSize": 20,
+        "pingIntervalNormal": 60000,
+        "pingIntervalBattery": 300000,
+        "refreshInterval": 900000,
+        "lookupTimeout": 1000,
+        "storeTTL": 600000,
+        "republishInterval": 300000
+    },
+    "resources": {
+        "maxPeers": 3200,
+        "maxCacheEntries": 256,
+        "maxHeapSize": 31457280,
+        "gcThreshold": 0.8,
+        "batchDelay": 5000
+    },
+    "p2p": {
+        "maxConnections": 5,
+        "chunkSize": 65536,
+        "chunkTimeout": 500,
+        "uploadThrottleRatio": 0.25,
+        "batteryPauseThreshold": 0.3
+    }
+}

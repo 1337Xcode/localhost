@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darshan Chheda | Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Light Mode (Default) */
+            --bg-color: #fdfdfd;
+            --text-color: #111;
+            --text-secondary: #555;
+            --accent-color: #000;
+            --border-color: #eee;
+            --status-bg: rgba(255, 255, 255, 0.9);
+            --status-border: rgba(0, 0, 0, 0.1);
+            --card-hover-shadow: rgba(0, 0, 0, 0.03);
+            --tag-bg: #f4f4f4;
+            --tag-text: #666;
+
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2.5rem;
+        }
+
+        /* Dark Mode Variables */
+        body.dark {
+            --bg-color: #111;
+            --text-color: #fdfdfd;
+            --text-secondary: #aaa;
+            --accent-color: #fff;
+            --border-color: #333;
+            --status-bg: rgba(20, 20, 20, 0.8);
+            --status-border: rgba(255, 255, 255, 0.1);
+            --card-hover-shadow: rgba(255, 255, 255, 0.05);
+            --tag-bg: #222;
+            --tag-text: #ccc;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 40px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Layout */
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--space-lg) 0;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin: 0;
+            font-weight: 600;
+            color: var(--accent-color);
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            margin-bottom: var(--space-xs);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-xs);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #888;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin: 0 0 var(--space-sm) 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.2s;
+        }
+
+        a:hover {
+            border-bottom-color: var(--accent-color);
+        }
+
+        /* Rainbow Text Effect */
+        .rainbow-text {
+            background: linear-gradient(to right, #ff0000, #ff7f00, #cccc00, #00cc00, #0000ff, #4b0082, #8f00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: rainbow 5s linear infinite;
+            background-size: 200% auto;
+            font-weight: 600;
+            border-bottom: none;
+        }
+
+        @keyframes rainbow {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Header */
+        header {
+            margin-bottom: var(--space-lg);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: var(--space-sm);
+        }
+
+        .socials {
+            display: flex;
+            gap: var(--space-md);
+            font-size: 0.9rem;
+        }
+
+        /* Theme Toggle (Dot) */
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .theme-toggle-btn:hover {
+            background: var(--tag-bg);
+        }
+
+        .theme-dot {
+            width: 14px;
+            height: 14px;
+            background-color: var(--text-color);
+            border-radius: 50%;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s;
+        }
+
+        .theme-toggle-btn:active .theme-dot {
+            transform: scale(0.8);
+        }
+
+        .theme-toggle-btn.rotate .theme-dot {
+            transform: scale(0.5);
+        }
+
+        /* P2P Status Dock (Floating Bottom) */
+        .status-dock {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--status-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            display: flex;
+            gap: var(--space-md);
+            border: 1px solid var(--status-border);
+            color: var(--text-secondary);
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            white-space: nowrap;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .status-item strong {
+            color: var(--accent-color) !important;
+            font-weight: 600;
+        }
+
+        /* Print Button (Floating Right) */
+        .print-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--status-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50%;
+            border: 1px solid var(--status-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            transition: transform 0.2s, background 0.3s, border-color 0.3s;
+            color: var(--text-secondary);
+        }
+
+        .print-btn:hover {
+            transform: scale(1.1);
+            color: var(--accent-color);
+        }
+
+        .print-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+
+        /* Cards */
+        .card {
+            border: 1px solid var(--border-color);
+            padding: var(--space-md);
+            border-radius: 6px;
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+        }
+
+        .card:hover {
+            border-color: var(--border-color);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--card-hover-shadow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: var(--space-xs);
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: #888;
+            white-space: nowrap;
+        }
+
+        .tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: var(--space-sm);
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            background: var(--tag-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: var(--tag-text);
+        }
+
+        /* List Styles */
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-title {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .list-meta {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--border-color);
+            color: #888;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: #fff !important;
+                color: #000 !important;
+                padding-bottom: 0 !important;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            strong {
+                color: #000 !important;
+            }
+
+            p,
+            .list-title,
+            .list-meta,
+            .card-meta,
+            .tag {
+                color: #333 !important;
+            }
+
+            .card,
+            .list-item,
+            h2,
+            a {
+                border-color: #ddd !important;
+            }
+
+            .status-dock,
+            .print-btn,
+            .theme-toggle-btn,
+            footer {
+                display: none !important;
+            }
+
+            .container {
+                width: 100% !important;
+                max-width: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .tag {
+                background-color: #f4f4f4 !important;
+                border: 1px solid #ddd;
+            }
+
+            a {
+                text-decoration: none !important;
+                border-bottom: none !important;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .status-dock {
+                width: 85%;
+                justify-content: space-between;
+                gap: 0;
+                font-size: 0.75rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .print-btn {
+                bottom: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                Darshan Chheda
+                <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Dark Mode">
+                    <span class="theme-dot"></span>
+                </button>
+            </h1>
+            <p class="subtitle">Software Engineer & Distributed Systems Architect</p>
+
+            <div class="socials">
+                <a href="mailto:dchheda111@gmail.com">Email</a>
+                <a href="https://linkedin.com/in/darshchheda" target="_blank">LinkedIn</a>
+                <a href="https://darshanchheda.com" target="_blank">Website</a>
+                <a href="https://github.com/1337XCode" target="_blank">GitHub</a>
+            </div>
+        </header>
+
+        <!-- About -->
+        <section>
+            <h2>About</h2>
+            <p>Versatile software engineer with a foundation in finance, leveraging analytical precision to architect
+                scalable tech solutions. Eager to contribute leadership in full-stack innovation, blending domain
+                knowledge with technical expertise to solve complex problems at global scale.</p>
+        </section>
+
+        <!-- Experience -->
+        <section>
+            <h2>Experience</h2>
+            <div class="list-item">
+                <span class="list-title">Android Developer</span>
+                <span class="list-meta">Patreon (Self-employed) • 2023-2024</span>
+            </div>
+            <div class="list-item">
+                <span class="list-title">QA Tester Intern</span>
+                <span class="list-meta">XSILICA Pvt. Ltd. • 2023</span>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section>
+            <h2>Projects</h2>
+            <div class="grid">
+                <!-- EchoEcho -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Echo Echo</h3>
+                        <a href="https://github.com/1337XCode/echo-echo" target="_blank" class="card-meta">Source</a>
+                    </div>
+                    <p>Decentralized P2P chat app with historic sync and E2E encryption.</p>
+                    <div class="tags">
+                        <span class="tag">KademliaDHT</span>
+                        <span class="tag">WebRTC</span>
+                        <span class="tag">VanillaJS</span>
+                    </div>
+                </div>
+
+                <!-- Student Management -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Student Management</h3>
+                        <a href="https://github.com/1337Xcode/academic-progression-monitoring-web-app" target="_blank"
+                            class="card-meta">Source</a>
+                    </div>
+                    <p>Web app for monitoring student progression with Admin dashboards.</p>
+                    <div class="tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">JWT</span>
+                    </div>
+                </div>
+
+                <!-- Save The Planet -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Save The Planet</h3>
+                        <a href="https://github.com/1337XCode/save-the-planet" target="_blank"
+                            class="card-meta">Source</a>
+                    </div>
+                    <p>Console-based text game in Java with environmental theme.</p>
+                    <div class="tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">OOP</span>
+                        <span class="tag">JUnit</span>
+                    </div>
+                </div>
+
+                <!-- Donut.asm -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Donut.asm</h3>
+                        <a href="https://github.com/1337Xcode/Donut" target="_blank" class="card-meta">Source</a>
+                    </div>
+                    <p>Fully working implementation of donut.c in Assembly x86.</p>
+                    <div class="tags">
+                        <span class="tag">Assembly x86</span>
+                        <span class="tag">Calculus</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Open Source -->
+        <section>
+            <h2>Open Source Contributions</h2>
+            <div class="list-item">
+                <span class="list-title">Implement admin CSV export and signed-url storage</span>
+                <a href="https://github.com/Cherry-CIC/cherry-Backend/pull/9" target="_blank"
+                    class="list-meta">Cherry-CIC/cherry-Backend #9</a>
+            </div>
+            <div class="list-item">
+                <span class="list-title">Implement user-based like/unlike system</span>
+                <a href="https://github.com/Cherry-CIC/cherry-Backend/pull/12" target="_blank"
+                    class="list-meta">Cherry-CIC/cherry-Backend #12</a>
+            </div>
+            <div class="list-item">
+                <span class="list-title">Refactor: use global in DashboardEditorButtons template</span>
+                <a href="https://github.com/kestra-io/kestra/pull/12982" target="_blank"
+                    class="list-meta">kestra-io/kestra #12982</a>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section>
+            <h2>Education</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>MSc in Software Development</h3>
+                        <span class="card-meta">Queen's University Belfast</span>
+                    </div>
+                    <p>Coursework: Cloud Computing, DevOps, OOP, UX Design.</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>BCom in Finance</h3>
+                        <span class="card-meta">University of Mumbai</span>
+                    </div>
+                    <p>Coursework: Quantitative Finance, Data Analytics, Econometrics.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Darshan Chheda. This site is hosted using <a href="https://github.com/1337XCode/localhost"
+                    target="_blank" class="rainbow-text">Localhost</a>.</p>
+        </footer>
+
+        <!-- P2P Status Dock -->
+        <div class="status-dock">
+            <div class="status-item">
+                DHT: <strong id="dht-status">Connecting...</strong>
+            </div>
+            <div class="status-item">
+                Peers: <strong id="peer-count">0</strong>
+            </div>
+            <div class="status-item">
+                Network: <strong id="p2p-stats">Idle</strong>
+            </div>
+        </div>
+
+        <!-- Print Button -->
+        <button class="print-btn" onclick="window.print()" title="Print Resume">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+        </button>
+    </div>
+
+    <script src="p2p-cdn.js"></script>
+    <script>
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        // Check saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            // Add rotation animation class
+            themeToggleBtn.classList.add('rotate');
+
+            // Remove animation class after it finishes (500ms)
+            setTimeout(() => {
+                themeToggleBtn.classList.remove('rotate');
+            }, 500);
+
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+
+            // Save preference
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('SW registered:', reg.scope))
+                    .catch(err => console.error('SW failed:', err));
+            });
+        }
+    </script>
+</body>
+
+</html>

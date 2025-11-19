@@ -1,0 +1,27 @@
+# Minimal, Battery-Optimized Tor Configuration
+
+# Data Directory (Standard Termux Location)
+DataDirectory /data/data/com.termux/files/home/.tor
+
+# Hidden Service Configuration
+HiddenServiceDir /data/data/com.termux/files/home/.tor/service/
+HiddenServicePort 80 127.0.0.1:8080
+HiddenServiceVersion 3
+
+# Performance Optimization
+HiddenServiceNumIntroductionPoints 3
+NumEntryGuards 4
+CircuitBuildTimeout 30
+LearnCircuitBuildTimeout 0
+
+# Battery Optimization
+HiddenServiceMaxStreams 10
+HiddenServiceIdleTimeout 300
+
+# Security
+SafeLogging 1
+ExitPolicy reject *:*
+AvoidDiskWrites 1
+
+# Logging (Disabled by default for I/O saving)
+# Log notice stdout
