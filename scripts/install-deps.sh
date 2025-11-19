@@ -7,7 +7,7 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-echo -e "${GREEN}=== Hidden Portfolio Setup ===${NC}"
+echo -e "${GREEN}=== Localhost Portfolio Setup ===${NC}"
 
 # 1. Check Termux Environment
 if [ -z "$TERMUX_VERSION" ]; then
@@ -27,22 +27,22 @@ pkg install -y tor nginx nodejs-lts
 
 # 3. Create Directory Structure
 echo -e "${YELLOW}Creating directory structure...${NC}"
-mkdir -p ~/hidden-portfolio/config
-mkdir -p ~/hidden-portfolio/www
-mkdir -p ~/hidden-portfolio/scripts
-mkdir -p ~/hidden-portfolio/.dht
-mkdir -p ~/hidden-portfolio/logs
+mkdir -p ~/localhost/config
+mkdir -p ~/localhost/www
+mkdir -p ~/localhost/scripts
+mkdir -p ~/localhost/.dht
+mkdir -p ~/localhost/logs
 
 # 4. Generate Placeholder Index if empty
-if [ ! -f ~/hidden-portfolio/www/index.html ]; then
-    echo "<html><body><h1>Hidden Portfolio Loading...</h1></body></html>" > ~/hidden-portfolio/www/index.html
+if [ ! -f ~/localhost/www/index.html ]; then
+    echo "<html><body><h1>Localhost Portfolio Loading...</h1></body></html>" > ~/localhost/www/index.html
 fi
 
 # 5. Set Permissions
 echo -e "${YELLOW}Setting permissions...${NC}"
-chmod +x ~/hidden-portfolio/scripts/*.sh
+chmod +x ~/localhost/scripts/*.sh
 
 # 6. Post-Install Instructions
 echo -e "${GREEN}=== Setup Complete ===${NC}"
 echo "To start the system, run:"
-echo "  ~/hidden-portfolio/scripts/start.sh"
+echo "  ~/localhost/scripts/start.sh"

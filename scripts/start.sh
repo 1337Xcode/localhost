@@ -140,7 +140,6 @@ HiddenServiceNumIntroductionPoints 3
 NumEntryGuards 4
 CircuitBuildTimeout 30
 HiddenServiceMaxStreams 10
-HiddenServiceIdleTimeout 300
 
 # Security
 SafeLogging 1
@@ -193,27 +192,37 @@ http {
 EOF
 
 # 6. Start Tor
-if ! pgrep -x "tor" > /dev/null; then
-    echo -e "${YELLOW}Starting Tor...${NC}"
-    tor -f "$TOR_CONFIG" > "$TOR_DATA_DIR/tor.log" 2>&1 &
-    
-    echo -n "Waiting for onion address..."
-    count=0
-    while [ ! -f "$HOSTNAME_FILE" ]; do
-        sleep 1
-        echo -n "."
-        count=$((count+1))
-        if [ $count -ge 60 ]; then
-            echo -e "\n${RED}Error: Timed out waiting for onion address.${NC}"
-            echo -e "${RED}Check $TOR_DATA_DIR/tor.log for details.${NC}"
-            killall tor || true
-            exit 1
-        fi
-    done
-    echo " Done."
-else
-    echo -e "${YELLOW}Tor is already running.${NC}"
+if pgrep -x "tor" > /dev/null; then
+    echo -e "${YELLOW}Stopping existing Tor process...${NC}"
+    pkill -x tor
+    sleep 2
 fi
+
+echo -e "${YELLOW}Starting Tor...${NC}"
+tor -f "$TOR_CONFIG" > "$TOR_DATA_DIR/tor.log" 2>&1 &
+TOR_PID=$!
+
+echo -n "Waiting for onion address..."
+count=0
+while [ ! -f "$HOSTNAME_FILE" ]; do
+    if ! ps -p $TOR_PID > /dev/null 2>&1; then
+        echo -e "\n${RED}Error: Tor process died unexpectedly.${NC}"
+        echo -e "${RED}Last 20 lines of log:${NC}"
+        tail -n 20 "$TOR_DATA_DIR/tor.log"
+        exit 1
+    fi
+    sleep 1
+    echo -n "."
+    count=$((count+1))
+    if [ $count -ge 60 ]; then
+        echo -e "\n${RED}Error: Timed out waiting for onion address.${NC}"
+        echo -e "${RED}Last 20 lines of log:${NC}"
+        tail -n 20 "$TOR_DATA_DIR/tor.log"
+        pkill -x tor || true
+        exit 1
+    fi
+done
+echo " Done."
 
 # 7. Start Nginx
 if ! pgrep -x "nginx" > /dev/null; then
