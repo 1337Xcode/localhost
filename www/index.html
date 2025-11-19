@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darshan Chheda | Software Engineer</title>
+    <meta name="description" content="I'm Darshan Chheda a Software Engineer specializing in full-stack development.">
+    <meta property="og:title" content="Darshan Chheda">
+    <meta property="og:description" content="I'm Software Engineer specializing in full-stack development, DevOps, and scalable solutions.">
+    <meta property="og:type" content="website">
+    <title>Darshan Chheda</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
     <style>
         :root {
             /* Light Mode (Default) */
@@ -191,8 +196,8 @@
             left: 50%;
             transform: translateX(-50%);
             background: var(--status-bg);
-            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
             padding: 10px 20px;
             border-radius: 100px;
             font-size: 0.8rem;
@@ -220,8 +225,8 @@
             width: 50px;
             height: 50px;
             background: var(--status-bg);
-            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
             border-radius: 50%;
             border: 1px solid var(--status-border);
             display: flex;
@@ -423,31 +428,32 @@
         <header>
             <h1>
                 Darshan Chheda
-                <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Dark Mode">
-                    <span class="theme-dot"></span>
+                <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode" role="switch" aria-checked="false">
+                    <span class="theme-dot" aria-hidden="true"></span>
                 </button>
             </h1>
-            <p class="subtitle">Software Engineer & Distributed Systems Architect</p>
+            <p class="subtitle">Software Engineer</p>
 
             <div class="socials">
                 <a href="mailto:dchheda111@gmail.com">Email</a>
-                <a href="https://linkedin.com/in/darshchheda" target="_blank">LinkedIn</a>
-                <a href="https://darshanchheda.com" target="_blank">Website</a>
-                <a href="https://github.com/1337XCode" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/darshchheda" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://www.darshanchheda.com" target="_blank" rel="noopener">Website</a>
+                <a href="https://github.com/1337XCode" target="_blank" rel="noopener">GitHub</a>
             </div>
         </header>
 
+        <main>
         <!-- About -->
-        <section>
-            <h2>About</h2>
-            <p>Versatile software engineer with a foundation in finance, leveraging analytical precision to architect
+        <section aria-labelledby="about-heading">
+            <h2 id="about-heading">About</h2>
+            <p>I'm a versatile software engineer with a foundation in finance, leveraging analytical precision to architect
                 scalable tech solutions. Eager to contribute leadership in full-stack innovation, blending domain
                 knowledge with technical expertise to solve complex problems at global scale.</p>
         </section>
 
         <!-- Experience -->
-        <section>
-            <h2>Experience</h2>
+        <section aria-labelledby="experience-heading">
+            <h2 id="experience-heading">Experience</h2>
             <div class="list-item">
                 <span class="list-title">Android Developer</span>
                 <span class="list-meta">Patreon (Self-employed) • 2023-2024</span>
@@ -459,14 +465,14 @@
         </section>
 
         <!-- Projects -->
-        <section>
-            <h2>Projects</h2>
+        <section aria-labelledby="projects-heading">
+            <h2 id="projects-heading">Projects</h2>
             <div class="grid">
                 <!-- EchoEcho -->
                 <div class="card">
                     <div class="card-header">
                         <h3>Echo Echo</h3>
-                        <a href="https://github.com/1337XCode/echo-echo" target="_blank" class="card-meta">Source</a>
+                        <a href="https://github.com/1337XCode/echo-echo" target="_blank" rel="noopener noreferrer" class="card-meta">Source</a>
                     </div>
                     <p>Decentralized P2P chat app with historic sync and E2E encryption.</p>
                     <div class="tags">
@@ -480,7 +486,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Student Management</h3>
-                        <a href="https://github.com/1337Xcode/academic-progression-monitoring-web-app" target="_blank"
+                        <a href="https://github.com/1337Xcode/academic-progression-monitoring-web-app" target="_blank" rel="noopener noreferrer"
                             class="card-meta">Source</a>
                     </div>
                     <p>Web app for monitoring student progression with Admin dashboards.</p>
@@ -495,7 +501,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Save The Planet</h3>
-                        <a href="https://github.com/1337XCode/save-the-planet" target="_blank"
+                        <a href="https://github.com/1337XCode/save-the-planet" target="_blank" rel="noopener noreferrer"
                             class="card-meta">Source</a>
                     </div>
                     <p>Console-based text game in Java with environmental theme.</p>
@@ -510,7 +516,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Donut.asm</h3>
-                        <a href="https://github.com/1337Xcode/Donut" target="_blank" class="card-meta">Source</a>
+                        <a href="https://github.com/1337Xcode/Donut" target="_blank" rel="noopener noreferrer" class="card-meta">Source</a>
                     </div>
                     <p>Fully working implementation of donut.c in Assembly x86.</p>
                     <div class="tags">
@@ -522,28 +528,28 @@
         </section>
 
         <!-- Open Source -->
-        <section>
-            <h2>Open Source Contributions</h2>
+        <section aria-labelledby="opensource-heading">
+            <h2 id="opensource-heading">Open Source Contributions</h2>
             <div class="list-item">
                 <span class="list-title">Implement admin CSV export and signed-url storage</span>
-                <a href="https://github.com/Cherry-CIC/cherry-Backend/pull/9" target="_blank"
+                <a href="https://github.com/Cherry-CIC/cherry-Backend/pull/9" target="_blank" rel="noopener noreferrer"
                     class="list-meta">Cherry-CIC/cherry-Backend #9</a>
             </div>
             <div class="list-item">
                 <span class="list-title">Implement user-based like/unlike system</span>
-                <a href="https://github.com/Cherry-CIC/cherry-Backend/pull/12" target="_blank"
+                <a href="https://github.com/Cherry-CIC/cherry-Backend/pull/12" target="_blank" rel="noopener noreferrer"
                     class="list-meta">Cherry-CIC/cherry-Backend #12</a>
             </div>
             <div class="list-item">
                 <span class="list-title">Refactor: use global in DashboardEditorButtons template</span>
-                <a href="https://github.com/kestra-io/kestra/pull/12982" target="_blank"
+                <a href="https://github.com/kestra-io/kestra/pull/12982" target="_blank" rel="noopener noreferrer"
                     class="list-meta">kestra-io/kestra #12982</a>
             </div>
         </section>
 
         <!-- Education -->
-        <section>
-            <h2>Education</h2>
+        <section aria-labelledby="education-heading">
+            <h2 id="education-heading">Education</h2>
             <div class="grid">
                 <div class="card">
                     <div class="card-header">
@@ -561,14 +567,15 @@
                 </div>
             </div>
         </section>
+        </main>
 
-        <footer>
+        <footer role="contentinfo">
             <p>&copy; 2025 Darshan Chheda. This site is hosted using <a href="https://github.com/1337XCode/localhost"
-                    target="_blank" class="rainbow-text">Localhost</a>.</p>
+                    target="_blank" rel="noopener noreferrer" class="rainbow-text">localhost</a></p>
         </footer>
 
         <!-- P2P Status Dock -->
-        <div class="status-dock">
+        <output class="status-dock" aria-live="polite" aria-label="Network status">
             <div class="status-item">
                 DHT: <strong id="dht-status">Connecting...</strong>
             </div>
@@ -578,25 +585,27 @@
             <div class="status-item">
                 Network: <strong id="p2p-stats">Idle</strong>
             </div>
-        </div>
+        </output>
 
         <!-- Print Button -->
-        <button class="print-btn" onclick="window.print()" title="Print Resume">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button class="print-btn" onclick="window.print()" aria-label="Print resume">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
             </svg>
         </button>
     </div>
 
-    <script src="p2p-cdn.js"></script>
-    <script>
+    <script src="p2p-cdn.js" defer></script>
+    <script defer>
         // Theme Toggle Logic
         const themeToggleBtn = document.getElementById('theme-toggle');
 
         // Check saved theme
-        if (localStorage.getItem('theme') === 'dark') {
+        const isDarkMode = localStorage.getItem('theme') === 'dark';
+        if (isDarkMode) {
             document.body.classList.add('dark');
+            themeToggleBtn.setAttribute('aria-checked', 'true');
         }
 
         themeToggleBtn.addEventListener('click', () => {
@@ -610,6 +619,9 @@
 
             document.body.classList.toggle('dark');
             const isDark = document.body.classList.contains('dark');
+
+            // Update ARIA attribute
+            themeToggleBtn.setAttribute('aria-checked', isDark);
 
             // Save preference
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
