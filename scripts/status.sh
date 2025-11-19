@@ -1,41 +1,34 @@
 #!/bin/bash
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+HOSTNAME_FILE="$PROJECT_ROOT/tor_data/service/hostname"
+
 # Colors
 GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-HOSTNAME_FILE="/data/data/com.termux/files/home/.tor/service/hostname"
+echo -e "=== Localhost Status ==="
 
-echo -e "${GREEN}=== System Status ===${NC}"
-
-# 1. Service Status
+# Check Tor
 if pgrep -x "tor" > /dev/null; then
-    echo -e "Tor:    ${GREEN}RUNNING${NC} (PID: $(pgrep -x tor))"
+    echo -e "Tor:    ${GREEN}Running${NC}"
 else
-    echo -e "Tor:    ${RED}STOPPED${NC}"
+    echo -e "Tor:    ${RED}Stopped${NC}"
 fi
 
+# Check Nginx
 if pgrep -x "nginx" > /dev/null; then
-    echo -e "Nginx:  ${GREEN}RUNNING${NC} (PID: $(pgrep -x nginx))"
+    echo -e "Nginx:  ${GREEN}Running${NC}"
 else
-    echo -e "Nginx:  ${RED}STOPPED${NC}"
+    echo -e "Nginx:  ${RED}Stopped${NC}"
 fi
 
-# 2. Onion Address
+# Show Onion Address
 if [ -f "$HOSTNAME_FILE" ]; then
-    echo -e "Onion:  ${GREEN}$(cat $HOSTNAME_FILE)${NC}"
+    ONION_ADDR=$(cat "$HOSTNAME_FILE")
+    echo -e "Onion:  ${GREEN}${ONION_ADDR}${NC}"
 else
-    echo -e "Onion:  ${YELLOW}Not generated${NC}"
+    echo -e "Onion:  ${RED}Not Available${NC}"
 fi
-
-# 3. Battery
-BATTERY_INFO=$(termux-battery-status)
-LEVEL=$(echo "$BATTERY_INFO" | grep percentage | cut -d: -f2 | tr -d ' ,')
-STATUS=$(echo "$BATTERY_INFO" | grep status | cut -d: -f2 | tr -d ' ",')
-echo -e "Battery: ${LEVEL}% ($STATUS)"
-
-# 4. Memory Usage
-echo -e "\n${YELLOW}Memory Usage:${NC}"
-ps -o pid,rss,comm | grep -E "tor|nginx"

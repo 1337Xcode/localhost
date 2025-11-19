@@ -1,37 +1,27 @@
 #!/bin/bash
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+TOR_DATA_DIR="$PROJECT_ROOT/tor_data"
+NGINX_DATA_DIR="$PROJECT_ROOT/nginx_data"
+
 # Colors
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo -e "${YELLOW}Stopping Localhost services...${NC}"
+echo -e "${YELLOW}Stopping Localhost Services...${NC}"
 
-# 1. Stop Monitor
+# Stop Monitor
 pkill -f "monitor.sh" || true
 
-# 2. Stop Nginx
-if pgrep -x "nginx" > /dev/null; then
-    echo "Stopping Nginx..."
-    kill -TERM $(pgrep -x nginx)
-    # Wait for it to die
-    sleep 1
-    if pgrep -x "nginx" > /dev/null; then
-        kill -9 $(pgrep -x nginx)
-    fi
+# Stop Nginx
+if [ -f "$NGINX_DATA_DIR/nginx.pid" ]; then
+    kill $(cat "$NGINX_DATA_DIR/nginx.pid") 2>/dev/null || true
 fi
+pkill -x nginx || true
 
-# 3. Stop Tor
-if pgrep -x "tor" > /dev/null; then
-    echo "Stopping Tor..."
-    kill -TERM $(pgrep -x tor)
-fi
+# Stop Tor
+pkill -x tor || true
 
-# 4. Release Wake Lock
-echo "Releasing wake lock..."
-termux-wake-unlock
-
-# 5. Cleanup
-rm -f /tmp/dht-suspend
-
-echo -e "${GREEN}Services stopped.${NC}"
+echo -e "${GREEN}Services Stopped.${NC}"
